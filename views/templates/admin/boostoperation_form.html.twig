@@ -1,0 +1,60 @@
+{% extends '@PrestaShop/Admin/layout.html.twig' %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    {% if boost_operation.id is defined %}
+                        {{ 'Edit Boost Operation'|trans({}, 'Admin.BoostProducts.Feature') }}
+                    {% else %}
+                        {{ 'New Boost Operation'|trans({}, 'Admin.BoostProducts.Feature') }}
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    {% if form_errors(form) %}
+                        <div class="alert alert-danger">{{ form_errors(form) }}</div>
+                    {% endif %}
+                    {{ form_start(form) }}
+                    <div class="form-group">
+                        {{ form_label(form.name, 'Name'|trans({}, 'Admin.Global')) }}
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.description, 'Description'|trans({}, 'Admin.Global')) }}
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.boost_percent, 'Boost Percent'|trans({}, 'Admin.BoostProducts.Feature')) }}
+                        {{ form_widget(form.boost_percent, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.start_date, 'Start Date'|trans({}, 'Admin.BoostProducts.Feature')) }}
+                        {{ form_widget(form.start_date, {'attr': {'class': 'form-control datetimepicker-input', 'data-toggle': 'datetimepicker', 'data-target': '#start_date'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.end_date, 'End Date'|trans({}, 'Admin.BoostProducts.Feature')) }}
+                        {{ form_widget(form.end_date, {'attr': {'class': 'form-control datetimepicker-input', 'data-toggle': 'datetimepicker', 'data-target': '#end_date'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.enabled, 'Enabled'|trans({}, 'Admin.BoostProducts.Feature')) }}
+                        {{ form_widget(form.enabled) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('admin_boost_product_boostoperation_index') }}" class="btn btn-outline-secondary">
+                        {{ 'Cancel'|trans({}, 'Admin.Actions') }}
+                    </a>
+                    <button type="submit" form="boost_operation_form" class="btn btn-primary float-right">
+                        {% if boost_operation.id is defined %}
+                            {{ 'Save'|trans({}, 'Admin.Actions') }}
+                        {% else %}
+                            {{ 'Create'|trans({}, 'Admin.Actions') }}
+                        {% endif %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

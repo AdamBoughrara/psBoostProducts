@@ -1,0 +1,47 @@
+{% extends '@PrestaShop/Admin/layout.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-end">
+            <div class="col-auto">
+                <a href="{{ path('admin_boost_product_new') }}" class="btn btn-primary mb-3">
+                    {{ 'Add Boosted Product'|trans({}, 'Admin.Actions') }}
+                </a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>{{ 'ID'|trans({}, 'Admin.Global') }}</th>
+                        <th>{{ 'Product Name'|trans({}, 'Admin.Catalog.Feature') }}</th>
+                        <th>{{ 'Customer Name'|trans({}, 'Admin.Global') }}</th>
+                        <th>{{ 'Boost Duration'|trans({}, 'Modules.BoostProducts.Admin') }}</th>
+                        <th>{{ 'Total Price'|trans({}, 'Modules.BoostProducts.Admin') }}</th>
+                        <th>{{ 'Boosted At'|trans({}, 'Modules.BoostProducts.Admin') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for boost in boosts %}
+                        <tr>
+                            <td>{{ boost.id }}</td>
+                            <td>{{ boost.product_name }}</td>
+                            <td>{{ boost.customer_name }}</td>
+                            <td>{{ boost.boost_duration }}</td>
+                            <td>{{ boost.total_price }}</td>
+                            <td>{{ boost.date_add|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                {{ 'No Boosted Products Found'|trans({}, 'Modules.BoostProducts.Admin') }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

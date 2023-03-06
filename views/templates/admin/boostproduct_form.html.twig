@@ -1,0 +1,47 @@
+{% extends '@PrestaShop/Admin/layout.html.twig' %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            {% block boostproduct_form %}
+                <div class="card">
+                    <div class="card-header">
+                        {% if is_new %}
+                            {{ 'Add new boost product'|trans({}, 'Admin.Catalog.Feature') }}
+                        {% else %}
+                            {{ 'Edit boost product'|trans({}, 'Admin.Catalog.Feature') }} {{ boost_product.id }}
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        {% if errors is not empty %}
+                            <div class="alert alert-danger">
+                                {% for error in errors %}
+                                    {{ error }}<br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <form method="post">
+                            {{ form_rest(form) }}
+
+                            <div class="form-group">
+                                {{ form_label(form.boost_price, 'Boost Price Per Day') }}
+                                {{ form_widget(form.boost_price, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(form.boost_duration, 'Boost Duration (Days)') }}
+                                {{ form_widget(form.boost_duration, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit"
+                                        class="btn btn-primary">{{ 'Save'|trans({}, 'Admin.Actions') }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

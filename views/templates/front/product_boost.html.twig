@@ -1,0 +1,21 @@
+<div class="boost-product">
+    {% if not is_boosted %}
+        <h3>Boost this product for more visibility!</h3>
+        <p>Boosting this product will increase its visibility in search results and category pages.</p>
+        <form action="{{ boost_url }}" method="post">
+            <input type="hidden" name="id_product" value="{{ product.id }}"/>
+            <div class="form-group">
+                <label for="boost_duration">Boost Duration:</label>
+                <input type="number" name="boost_duration" id="boost_duration" min="1" value="1"/>
+            </div>
+            <p class="boost-price">{{ 'Boost price per day: %price%'|trans({'%price%': boost_price|price_format}) }}</p>
+            <p class="total-price">{{ 'Total boost price: %price%'|trans({'%price%': boost_price * 1|price_format}) }}</p>
+            <button type="submit" name="boost_product" class="btn btn-primary">{{ 'Boost' }}</button>
+        </form>
+    {% else %}
+        <p>This product is currently boosted until {{ boost_end_date|date('Y-m-d H:i:s') }}.</p>
+        <p>Boost duration: {{ boost_duration }} day(s).</p>
+        <p>Boost price per day: {{ boost_price|price_format }}.</p>
+        <p>Total boost price: {{ total_price|price_format }}.</p>
+    {% endif %}
+</div>
